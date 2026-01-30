@@ -1,49 +1,51 @@
-
 <p align="center">
-  <img src="assets/clawdball.png" width="220" />
+  <img src="dogeball.png" width="220" />
 </p>
 
-# Clawdball
+# dogeball
 
-Clawdball is a powerball style token distribution mechanism built using Claude-generated code and reasoning.
+dogeball is a powerball-style token distribution mechanism inspired by the doge meme and built using Molt Bot–generated code and execution logic.
 
-The system converts ongoing protocol activity into periodic randomized distribution events that reward token holders automatically without staking, snapshots, or manual claims.
+The system converts ongoing protocol activity into periodic randomized reward rounds that automatically distribute tokens to holders — without staking, snapshots, or claim transactions.
 
-This repository provides a full reference implementation intended for transparency, inspection, and extension.
+This repository serves as a full reference implementation designed for transparency, inspection, and extension.
 
 ---
 
 ## Core Idea
 
-Clawdball operates as a continuous loop:
+dogeball runs as a continuous loop:
 
-1. Protocol activity generates fees
-2. Fees are routed into a distribution pool
-3. At fixed intervals, a distribution round is triggered
-4. Random holders are selected using deterministic entropy
-5. Rewards are paid out directly on-chain
+1. Protocol activity generates fees  
+2. Fees are routed into a distribution pool  
+3. At fixed intervals, a distribution round is triggered  
+4. Random holders are selected using deterministic entropy  
+5. Rewards are paid out directly on-chain  
 
-Each round behaves like a powerball draw. Most rounds distribute smaller rewards. Some rounds concentrate larger payouts to fewer holders.
+Each round behaves like a powerball draw.
+
+Most rounds distribute smaller rewards across multiple holders.  
+Some rounds concentrate larger payouts to fewer wallets.
 
 ---
 
 ## Design Goals
 
-- No staking
-- No snapshots
-- No claim transactions
-- Fully deterministic and replayable
-- Transparent distribution logic
-- Simple holder eligibility rules
-- Resistant to manipulation
+- No staking  
+- No snapshots  
+- No claim transactions  
+- Fully deterministic and replayable  
+- Transparent distribution logic  
+- Simple holder eligibility rules  
+- Resistant to manipulation  
 
 ---
 
 ## Architecture
 
-Clawdball is composed of four primary contracts:
+dogeball is composed of four primary contracts:
 
-### Clawdball.sol
+### dogeball.sol
 ERC20-compatible token with fee routing hooks.
 
 ### TreasuryRouter.sol
@@ -59,14 +61,14 @@ Provides deterministic entropy derived from chain state.
 
 ## Distribution Rounds
 
-A distribution round is triggered every fixed interval.
+A distribution round is triggered at a fixed interval.
 
 Each round:
-- Locks the current pool balance
-- Computes entropy using recent block data
-- Selects N winning holders
-- Computes weighted payouts
-- Executes transfers atomically
+- Locks the current pool balance  
+- Computes entropy using recent block data  
+- Selects N winning holders  
+- Computes weighted payouts  
+- Executes transfers atomically  
 
 No user interaction is required.
 
@@ -75,49 +77,49 @@ No user interaction is required.
 ## Entropy Model
 
 Entropy is derived from:
-- Previous block hash
-- Total token supply
-- Current round index
-- Pool balance
+- Previous block hash  
+- Total token supply  
+- Current round index  
+- Pool balance  
 
 This ensures:
-- Determinism
-- Replayability
-- Resistance to miner manipulation
+- Determinism  
+- Replayability  
+- Resistance to miner manipulation  
 
 ---
 
 ## Holder Eligibility
 
 A wallet is eligible if:
-- Balance is above the minimum threshold
-- Tokens were acquired before the round lock
-- Wallet is not blacklisted or excluded
+- Balance is above the minimum threshold  
+- Tokens were acquired before the round lock  
+- Wallet is not blacklisted or excluded  
 
 ---
 
 ## Simulation
 
-The scripts directory contains simulation tools for validating distribution fairness and payout variance.
+The `scripts/` directory contains simulation tools for validating distribution fairness and payout variance across multiple rounds.
 
 ---
 
 ## Security Notes
 
-This system has not been audited.
+This system has **not** been audited.
 
 Do not deploy without:
-- Independent security review
-- Parameter tuning
-- Stress testing
+- Independent security review  
+- Parameter tuning  
+- Stress testing  
 
 ---
 
 ## Philosophy
 
-Clawdball treats distribution as an event, not a yield.
+dogeball treats distribution as an event, not yield.
 
-Holders do not opt in.
+Holders do not opt in.  
 They simply exist.
 
 ---
